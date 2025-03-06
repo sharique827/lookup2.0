@@ -17,4 +17,6 @@ COPY . .
 RUN npm run build  
 
 # Run the application
-CMD ["npm", "run", "start:dev"]  # Use `start:dev` for NestJS hot-reloading
+CMD ["npm", "run", "start:dev"]  
+
+# Use `start:dev` for NestJS hot-reloading
