@@ -8,8 +8,8 @@
 
 ## Step 1: Clone the Repository
 
-git clone <repository-url>
-cd <repository-directory>
+git clone <https://github.com/sharique827/lookup2.0.git>
+cd <lookup2.0>
 
 
 ## Step 2: Run the Application Using Docker
