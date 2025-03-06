@@ -21,8 +21,35 @@ docker compose up --build
 # You can test the service using the following curl command:
 curl --location 'http://localhost:8080/lookup/staging' \
 --header 'Content-Type: application/json' \
---header 'Authorization: Signature keyId="saleor-stg-seller.thewitslab.com|812f53e5-a57d-4bfd-b635-5535927e59e4|ed25519",algorithm="ed25519",created="1740984813",expires="1740988413",headers="(created) (expires) digest",signature="kaLO+JiNhChe1ivc21EyQnFmUQyf/0s7xRl/9P+fyhBtz5avBSy5pTaukaaFKAfRIevXAGTPpNXua1BtNtI/CA=="' \
 --data '{
     "type": "BPP",
     "subscriber_id": "dev.zaraaq.com"
 }'
+
+
+
+## ENV FILE FORMAT
+
+# STAGING
+STG_URL=https://staging.registry.ondc.org/v2.0/lookup
+STG_PRIVATE_KEY=your_private_key
+STG_SUBSCRIBER_ID=your_subscriber_id
+STG_UKID=your_ukid
+
+
+# PREPROD
+PRE_URL=https://preprod.registry.ondc.org/v2.0/lookup
+PRE_PRIVATE_KEY=your_private_key
+PRE_SUBSCRIBER_ID=your_subscriber_id
+PRE_UKID=your_ukid
+
+
+# PRODUCTION
+PROD_URL=https://prod.registry.ondc.org/v2.0/lookup
+PROD_PRIVATE_KEY=your_private_key
+PROD_SUBSCRIBER_ID=yourr_subscriber_id
+PROD_UKID=your_ukid
+
+
+
+## PORT=8080 (Keep the port as 8080), if you want to change the port please do update the  docker-compose.yml file
