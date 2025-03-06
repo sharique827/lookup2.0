@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import axios from "axios";
 import { isEmpty } from "lodash";
-import { bodyMissing } from "../utils/constant";
+import { bodyMissing, STATUS_CODE } from "../utils/constant";
 import { creatingHeader, errorMessage } from "../utils/helper";
 
 export async function lookup(req: Request, res: Response): Promise<any> {
@@ -16,10 +16,10 @@ export async function lookup(req: Request, res: Response): Promise<any> {
         Authorization: header,
       },
     });
-    return res.json(response.data);
+    return res.status(STATUS_CODE.SUCCESS).json(response.data);
   } catch (error: any) {
     return res
-      .status(404)
+      .status(STATUS_CODE.NOT_FOUND)
       .json(error.response ? error.response.data : errorMessage(error.message));
   }
 }
