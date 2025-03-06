@@ -13,7 +13,7 @@ cd <lookup2.0>
 
 
 ## Step 2: Run the Application Using Docker
-docker-compose up --build
+docker compose up --build
 
 
 ### API Request
