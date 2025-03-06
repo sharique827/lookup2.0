@@ -21,10 +21,7 @@ docker compose up --build
 ### You can test the service using the following curl command:
 curl --location 'http://localhost:8080/lookup/staging' \
 --header 'Content-Type: application/json' \
---data '{
-    "type": "BPP",
-    "subscriber_id": "dev.zaraaq.com"
-}'
+--data '{ "type": "BPP", "subscriber_id": "abc.com" }'
 
 
 
