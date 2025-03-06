@@ -3,7 +3,7 @@ import { ENV, incorrectENV, ACK_STATUS } from "./constant";
 
 export async function creatingHeader(
   payload: { [key: string]: any },
-  env: any
+  env: string
 ) {
   try {
     const keys = getEnvBasedKeys(env);
