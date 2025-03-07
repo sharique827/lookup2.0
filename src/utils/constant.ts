@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const bodyMissing = "Request body is missing or empty";
+export const envMissing = "Missing 'env' in request body";
 export const PORT = process.env.PORT || 8080;
 export const enum ENV {
   STAGING = "staging",

@@ -3,4 +3,4 @@ import { lookup } from "../controller/lookup";
 
 export const router = express.Router();
 
-router.post("/lookup/:env", lookup);
+router.post("/lookup", lookup);

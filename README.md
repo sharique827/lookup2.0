@@ -56,7 +56,7 @@ PRE_UKID=your_ukid
 ### PRODUCTION
 PROD_URL=https://prod.registry.ondc.org/v2.0/lookup
 PROD_PRIVATE_KEY=your_private_key
-PROD_SUBSCRIBER_ID=yourr_subscriber_id
+PROD_SUBSCRIBER_ID=your_subscriber_id
 PROD_UKID=your_ukid
 
 

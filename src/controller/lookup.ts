@@ -1,26 +1,28 @@
 import axios from "axios";
 import { NextFunction, Request, Response } from "express";
 import { isEmpty } from "lodash";
-import { bodyMissing, STATUS_CODE } from "../utils/constant";
+import { bodyMissing, envMissing, STATUS_CODE } from "../utils/constant";
 import { createHeader } from "../utils/helper";
 
 export async function lookup(
   req: Request,
   res: Response,
   next: NextFunction
-): Promise<any> {
+): Promise<void> {
   try {
-    const { env } = req.params;
-    if (!req.body || isEmpty(req.body)) throw new Error(bodyMissing);
+    const { env, ...body } = req.body;
 
-    const { header, url } = await createHeader(req.body, env);
+    if (isEmpty(body)) throw new Error(bodyMissing);
+    if (!env) throw new Error(envMissing);
 
-    const response = await axios.post(url as string, req.body, {
-      headers: {
-        Authorization: header,
-      },
+    const { header, url } = await createHeader(body, env);
+    if (!url) throw new Error("Failed to generate request URL");
+
+    const response = await axios.post(url, body, {
+      headers: { Authorization: header },
     });
-    return res.status(STATUS_CODE.SUCCESS).json(response.data);
+
+    res.status(STATUS_CODE.SUCCESS).json(response.data);
   } catch (error) {
     next(error);
   }
