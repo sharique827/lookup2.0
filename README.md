@@ -21,19 +21,31 @@ docker compose up --build
 ### You can test the service using the following curl command:
 
 #### STAGING
-curl --location 'http://localhost:8080/lookup/staging' \
+curl --location 'http://localhost:8080/lookup' \
 --header 'Content-Type: application/json' \
---data '{ "type": "BPP", "subscriber_id": "abc.com" }'
+--data '{
+    "type": "BAP",
+    "env": "staging",
+    "subscriber_id": "abc.com"
+}'
 
 #### PREPROD
-curl --location 'http://localhost:8080/lookup/preprod' \
+curl --location 'http://localhost:8080/lookup' \
 --header 'Content-Type: application/json' \
---data '{ "type": "BPP", "subscriber_id": "abc.com" }'
+--data '{
+    "type": "BAP",
+    "env": "preprod",
+    "subscriber_id": "abc.com"
+}'
 
 #### PRODUCTION
-curl --location 'http://localhost:8080/lookup/prod' \
+curl --location 'http://localhost:8080/lookup' \
 --header 'Content-Type: application/json' \
---data '{ "type": "BPP", "subscriber_id": "abc.com" }'
+--data '{
+    "type": "BAP",
+    "env": "prod",
+    "subscriber_id": "abc.com"
+}'
 
 
 
