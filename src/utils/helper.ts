@@ -1,7 +1,7 @@
 import { createAuthorizationHeader } from "ondc-crypto-sdk-nodejs";
 import { ENV, incorrectENV, ACK_STATUS, PREENV } from "./constant";
 
-export async function creatingHeader(
+export async function createHeader(
   payload: { [key: string]: any },
   env: string
 ) {

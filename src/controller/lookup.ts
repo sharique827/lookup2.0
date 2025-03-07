@@ -2,7 +2,7 @@ import axios from "axios";
 import { NextFunction, Request, Response } from "express";
 import { isEmpty } from "lodash";
 import { bodyMissing, STATUS_CODE } from "../utils/constant";
-import { creatingHeader } from "../utils/helper";
+import { createHeader } from "../utils/helper";
 
 export async function lookup(
   req: Request,
@@ -13,7 +13,7 @@ export async function lookup(
     const { env } = req.params;
     if (!req.body || isEmpty(req.body)) throw new Error(bodyMissing);
 
-    const { header, url } = await creatingHeader(req.body, env);
+    const { header, url } = await createHeader(req.body, env);
 
     const response = await axios.post(url as string, req.body, {
       headers: {
