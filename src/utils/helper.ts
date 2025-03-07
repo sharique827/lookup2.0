@@ -1,5 +1,5 @@
 import { createAuthorizationHeader } from "ondc-crypto-sdk-nodejs";
-import { ENV, incorrectENV, ACK_STATUS } from "./constant";
+import { ENV, incorrectENV, ACK_STATUS, PREENV } from "./constant";
 
 export async function creatingHeader(
   payload: { [key: string]: any },
@@ -22,31 +22,20 @@ export async function creatingHeader(
 }
 
 function getEnvBasedKeys(env: string) {
-  switch (String(env).toLowerCase()) {
-    case ENV.STAGING:
-      return {
-        URL: process.env.STG_URL,
-        SUBSCRIBER_ID: process.env.STG_SUBSCRIBER_ID,
-        UKID: process.env.STG_UKID,
-        PRIVATE_KEY: process.env.STG_PRIVATE_KEY,
-      };
-    case ENV.PREPROD:
-      return {
-        URL: process.env.PRE_URL,
-        SUBSCRIBER_ID: process.env.PRE_SUBSCRIBER_ID,
-        UKID: process.env.PRE_UKID,
-        PRIVATE_KEY: process.env.PRE_PRIVATE_KEY,
-      };
-    case ENV.PROD:
-      return {
-        URL: process.env.PROD_URL,
-        SUBSCRIBER_ID: process.env.PROD_SUBSCRIBER_ID,
-        UKID: process.env.PROD_UKID,
-        PRIVATE_KEY: process.env.PROD_PRIVATE_KEY,
-      };
-    default:
-      throw new Error(incorrectENV);
-  }
+  const envPrefix = {
+    [ENV.STAGING]: [PREENV.STG],
+    [ENV.PREPROD]: [PREENV.PRE],
+    [ENV.PROD]: [PREENV.PROD],
+  }[env.toLowerCase()];
+
+  if (!envPrefix) throw new Error(incorrectENV);
+
+  return {
+    URL: process.env[`${envPrefix}_URL`],
+    SUBSCRIBER_ID: process.env[`${envPrefix}_SUBSCRIBER_ID`],
+    UKID: process.env[`${envPrefix}_UKID`],
+    PRIVATE_KEY: process.env[`${envPrefix}_PRIVATE_KEY`],
+  };
 }
 
 export function errorMessage(error: any) {

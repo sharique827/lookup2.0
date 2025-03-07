@@ -9,6 +9,12 @@ export const enum ENV {
   PROD = "prod",
 }
 
+export const enum PREENV {
+  STG = "STG",
+  PRE = "PRE",
+  PROD = "PROD",
+}
+
 export const incorrectENV = "INVALID ENVIRONMENT";
 
 export const enum ACK_STATUS {
