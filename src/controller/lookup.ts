@@ -1,10 +1,14 @@
-import { Request, Response } from "express";
 import axios from "axios";
+import { NextFunction, Request, Response } from "express";
 import { isEmpty } from "lodash";
 import { bodyMissing, STATUS_CODE } from "../utils/constant";
-import { creatingHeader, errorMessage } from "../utils/helper";
+import { creatingHeader } from "../utils/helper";
 
-export async function lookup(req: Request, res: Response): Promise<any> {
+export async function lookup(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<any> {
   try {
     const { env } = req.params;
     if (!req.body || isEmpty(req.body)) throw new Error(bodyMissing);
@@ -17,9 +21,7 @@ export async function lookup(req: Request, res: Response): Promise<any> {
       },
     });
     return res.status(STATUS_CODE.SUCCESS).json(response.data);
-  } catch (error: any) {
-    return res
-      .status(STATUS_CODE.NOT_FOUND)
-      .json(error.response ? error.response.data : errorMessage(error.message));
+  } catch (error) {
+    next(error);
   }
 }
